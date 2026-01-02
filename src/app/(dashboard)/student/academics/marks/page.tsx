@@ -63,7 +63,7 @@ export default async function DetailedMarksPage() {
                                     <TableHead className="text-[9px] text-gray-500 uppercase font-black px-6">Component</TableHead>
                                     <TableHead className="text-[9px] text-gray-500 uppercase font-black text-center">Max</TableHead>
                                     <TableHead className="text-[9px] text-gray-500 uppercase font-black text-center">Weightage</TableHead>
-                                    <TableHead className="text-[9px] text-gray-500 uppercase font-black text-center text-rose-400">Scored</TableHead>
+                                    <TableHead className="text-[9px] uppercase font-black text-center text-rose-400">Scored</TableHead>
                                     <TableHead className="text-[9px] text-gray-500 uppercase font-black text-right pr-6">Status</TableHead>
                                 </TableRow>
                             </TableHeader>
