@@ -46,7 +46,7 @@ export default async function ParentDashboard() {
         <div className="flex items-center gap-4">
            <div className="text-right hidden sm:block">
               <p className="text-[10px] text-gray-600 uppercase font-black tracking-widest leading-none">Last Synced</p>
-              <p className="text-[11px] text-gray-400 font-bold uppercase">Jan 02, 2026 • 12:40 PM</p>
+              <p className="text-[11px] text-gray-400 font-bold uppercase">{new Date().toLocaleString('en-US', { month: 'short', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })}</p>
            </div>
            <Button className="bg-white/5 hover:bg-white text-white hover:text-black border border-white/10 rounded-2xl h-12 px-6 font-black uppercase text-[10px] tracking-widest transition-all">
               <MessageSquare className="w-4 h-4 mr-2" /> Message Proctor
@@ -61,15 +61,15 @@ export default async function ParentDashboard() {
             value={`${avgAttendance.toFixed(1)}%`} 
             subtitle="Current Semester" 
             icon={<CheckCircle className="w-6 h-6 text-emerald-400" />}
-            trend="+2.4% from last month"
-            color="emerald"
+            trend={avgAttendance >= 75 ? "MEETS CRITERIA" : "ATTENTION REQUIRED"}
+            color={avgAttendance >= 75 ? "emerald" : "rose"}
          />
          <StatsCard 
             title="Ward GPA" 
             value={student.cgpa.toFixed(2)} 
             subtitle="Cumulative Grade" 
             icon={<GraduationCap className="w-6 h-6 text-indigo-400" />}
-            trend="Top 15% of Batch"
+            trend={student.cgpa >= 8.5 ? "OUTSTANDING" : student.cgpa >= 7.5 ? "CONSISTENT" : "IMPROVEMENT NEEDED"}
             color="indigo"
          />
          <StatsCard 
@@ -77,15 +77,15 @@ export default async function ParentDashboard() {
             value={`₹${(pendingFees / 1000).toFixed(1)}k`} 
             subtitle="Academic & Hostel" 
             icon={<CreditCard className="w-6 h-6 text-rose-400" />}
-            trend="Next Due: Jan 31"
-            color="rose"
+            trend={pendingFees === 0 ? "ALL CLEAR" : "DUE IN 10 DAYS"}
+            color={pendingFees === 0 ? "emerald" : "rose"}
          />
          <StatsCard 
             title="Exam Status" 
             value="ACTIVE" 
-            subtitle="Winter 2024-25" 
+            subtitle="Current Schedule" 
             icon={<Calendar className="w-6 h-6 text-amber-400" />}
-            trend="CAT-1 Scheduled"
+            trend="READY FOR CAT"
             color="amber"
          />
       </div>
@@ -145,7 +145,7 @@ export default async function ParentDashboard() {
                      </CardContent>
                  </Card>
 
-                 <Card className="bg-[#0A0A0B]/80 border-white/10 overflow-hidden backdrop-blur-3xl min-h-[300px] flex flex-col">
+                  <Card className="bg-[#0A0A0B]/80 border-white/10 overflow-hidden backdrop-blur-3xl min-h-[300px] flex flex-col">
                      <CardHeader className="bg-black/40 border-b border-white/5">
                         <CardTitle className="text-white text-md uppercase font-black italic flex items-center gap-2">
                             <ShieldCheck className="w-5 h-5 text-indigo-400" /> Compliance & Safety
@@ -153,13 +153,13 @@ export default async function ParentDashboard() {
                      </CardHeader>
                      <CardContent className="p-6 space-y-6">
                          <div className="space-y-4">
-                            <ComplianceRow label="Hostel Curfew" status="IN-PREMISES" color="emerald" />
-                            <ComplianceRow label="Disciplinary Record" status="EXCELLENT" color="emerald" />
-                            <ComplianceRow label="Leave Authorization" status="AUTHORIZED" color="indigo" />
-                            <ComplianceRow label="Biometric Status" status="SYNCED" color="indigo" />
+                            <ComplianceRow label="Hostel Curfew" status="RECORDED" color="emerald" />
+                            <ComplianceRow label="Disciplinary Record" status="NO ENTRIES" color="emerald" />
+                            <ComplianceRow label="Leave Authorization" status="SYNCED" color="indigo" />
+                            <ComplianceRow label="Biometric Status" status="ACTIVE" color="indigo" />
                          </div>
                      </CardContent>
-                 </Card>
+                  </Card>
             </div>
          </div>
 
@@ -196,10 +196,18 @@ export default async function ParentDashboard() {
             <Card className="bg-white/5 border-white/10 p-6">
                 <h4 className="text-white font-black text-xs uppercase tracking-widest border-b border-white/5 pb-4 mb-4 italic">Quick Actions</h4>
                 <div className="grid grid-cols-2 gap-3">
-                    <ActionButton icon={<CreditCard className="w-4 h-4" />} label="Pay Fees" color="indigo" />
-                    <ActionButton icon={<Calendar className="w-4 h-4" />} label="Exam View" color="amber" />
-                    <ActionButton icon={<CheckCircle className="w-4 h-4" />} label="Attendance" color="emerald" />
-                    <ActionButton icon={<GraduationCap className="w-4 h-4" />} label="Grades" color="purple" />
+                    <Link href="/parent/payments" className="contents">
+                        <ActionButton icon={<CreditCard className="w-4 h-4" />} label="Pay Fees" color="indigo" />
+                    </Link>
+                    <Link href="/parent/schedule" className="contents">
+                        <ActionButton icon={<Calendar className="w-4 h-4" />} label="Exam View" color="amber" />
+                    </Link>
+                    <Link href="/parent/attendance" className="contents">
+                        <ActionButton icon={<CheckCircle className="w-4 h-4" />} label="Attendance" color="emerald" />
+                    </Link>
+                    <Link href="/parent/performance" className="contents">
+                        <ActionButton icon={<GraduationCap className="w-4 h-4" />} label="Grades" color="purple" />
+                    </Link>
                 </div>
             </Card>
          </div>
