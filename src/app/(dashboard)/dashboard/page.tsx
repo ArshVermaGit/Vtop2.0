@@ -17,7 +17,7 @@ export default async function DashboardRedirect() {
     case "FACULTY":
       redirect("/faculty/dashboard")
     case "PARENT":
-      redirect("/parents/dashboard")
+      redirect("/parent/dashboard")
     case "ADMIN":
       redirect("/admin/dashboard")
     default:
