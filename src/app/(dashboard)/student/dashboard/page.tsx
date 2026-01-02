@@ -2,15 +2,20 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Calendar, Clock, Bell, BookOpen, GraduationCap, CheckCircle } from "lucide-react"
-import { getStudentProfile, getAttendance, getTimetable } from "@/lib/actions"
+import { getStudentProfile, getAttendance, getTimetable, getCommunications } from "@/lib/actions"
 
 export default async function DashboardPage() {
   const profile = await getStudentProfile()
   const attendance = await getAttendance()
   const timetable = await getTimetable()
+  const { communications } = await getCommunications()
+
+  const avgAttendance = attendance.length > 0 
+    ? (attendance.reduce((acc, curr) => acc + curr.percentage, 0) / attendance.length).toFixed(1) + "%"
+    : "N/A"
 
   const stats = [
-    { label: "Overall Attendance", value: "88%", icon: CheckCircle, color: "text-green-400" },
+    { label: "Overall Attendance", value: avgAttendance, icon: CheckCircle, color: "text-green-400" },
     { label: "Current GPA", value: profile?.cgpa?.toFixed(2) || "0.00", icon: GraduationCap, color: "text-blue-400" },
     { label: "Active Courses", value: timetable.length.toString(), icon: BookOpen, color: "text-purple-400" },
   ]
@@ -72,22 +77,16 @@ export default async function DashboardPage() {
             <CardDescription className="text-gray-400">Latest announcements and alerts</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-             <div className="flex gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
-               <div className="mt-1"><Bell className="h-4 w-4 text-amber-400" /></div>
-               <div>
-                  <h4 className="text-sm font-medium text-white group-hover:text-blue-400 transition-colors">Exam timetable released!</h4>
-                  <p className="text-xs text-gray-500 mt-1">Check the academics section for the detailed schedule of Fall 2024 FAT.</p>
-                  <span className="text-[10px] text-gray-600 mt-2 block">2 hours ago</span>
-               </div>
-             </div>
-             <div className="flex gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
-               <div className="mt-1"><Clock className="h-4 w-4 text-purple-400" /></div>
-               <div>
-                  <h4 className="text-sm font-medium text-white group-hover:text-purple-400 transition-colors">Course registration closing</h4>
-                  <p className="text-xs text-gray-500 mt-1">Final reminder: Add/drop period ends tomorrow at 5:00 PM.</p>
-                  <span className="text-[10px] text-gray-600 mt-2 block">5 hours ago</span>
-               </div>
-             </div>
+            {communications.length > 0 ? communications.slice(0, 3).map((comm: any, i: number) => (
+              <div key={i} className="flex gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
+                <div className="mt-1"><Bell className="h-4 w-4 text-amber-400" /></div>
+                <div>
+                  <h4 className="text-sm font-medium text-white group-hover:text-blue-400 transition-colors">{comm.title}</h4>
+                  <p className="text-xs text-gray-500 mt-1 line-clamp-2">{comm.content}</p>
+                  <span className="text-[10px] text-gray-600 mt-2 block">{new Date(comm.date).toLocaleDateString()}</span>
+                </div>
+              </div>
+            )) : <p className="text-gray-500 text-sm italic py-4 text-center">No new notifications.</p>}
           </CardContent>
         </Card>
       </div>
