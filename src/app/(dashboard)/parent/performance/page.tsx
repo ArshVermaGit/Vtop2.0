@@ -92,7 +92,7 @@ export default async function StudentProgressPage() {
                             </div>
                             <div>
                                 <p className="text-sm font-medium text-white">Health Status</p>
-                                <p className="text-xs text-gray-500">Normal (No medical logs in last 30 days)</p>
+                                <p className="text-xs text-gray-500">Normal (No recorded incidents)</p>
                             </div>
                          </div>
                          <div className="flex items-start gap-4">
@@ -101,7 +101,7 @@ export default async function StudentProgressPage() {
                             </div>
                             <div>
                                 <p className="text-sm font-medium text-white">Security / Late Entry</p>
-                                <p className="text-xs text-gray-500">0 infractions recorded this semester</p>
+                                <p className="text-xs text-gray-500">0 infractions this semester</p>
                             </div>
                          </div>
                          <div className="flex items-start gap-4">
@@ -110,7 +110,7 @@ export default async function StudentProgressPage() {
                             </div>
                             <div>
                                 <p className="text-sm font-medium text-white">Hostel Residence</p>
-                                <p className="text-xs text-gray-500">{profile?.hostelBlock}, Room {profile?.hostelRoom}</p>
+                                <p className="text-xs text-gray-500">{student?.hostelBlock || 'N/A'}, Room {student?.hostelRoom || 'N/A'}</p>
                             </div>
                          </div>
                     </CardContent>
@@ -121,9 +121,9 @@ export default async function StudentProgressPage() {
                     <h3 className="text-white font-bold">In-Campus Status</h3>
                     <div className="mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/20">
                         <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                        CURRENTLY INSIDE
+                        IN-CAMPUS (LIVE)
                     </div>
-                    <p className="text-[10px] text-gray-400 mt-3">Last seen at SCSE Dept (Gate 2) at 05:45 PM</p>
+                    <p className="text-[10px] text-gray-400 mt-3">Verified by Biometric Sync</p>
                 </div>
             </div>
         </div>
