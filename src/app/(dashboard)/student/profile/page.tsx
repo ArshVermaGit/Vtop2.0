@@ -39,7 +39,7 @@ export default async function ProfilePage() {
         
         <div className="relative w-32 h-32 rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl group-hover:border-blue-500/30 transition-all">
           {profile.photoUrl ? (
-            <Image src={profile.photoUrl} alt={profile.user.name} fill className="object-cover" />
+            <Image src={profile.photoUrl} alt={profile.user.name} fill className="object-cover" unoptimized />
           ) : (
             <div className="w-full h-full bg-linear-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white text-4xl font-bold">
               {profile.user.name[0]}
