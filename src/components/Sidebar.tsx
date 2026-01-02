@@ -8,12 +8,10 @@ import { useSession } from "next-auth/react"
 import {
   BarChartHorizontal,
   History,
-  Search,
   MapPin,
   LayoutDashboard,
   BookOpen,
   Calendar,
-  Clock,
   FileText,
   CreditCard,
   MessageCircle,
@@ -24,7 +22,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
-  CheckSquare,
   Users,
   Database,
   Shield,
@@ -32,20 +29,35 @@ import {
   LayoutGrid,
   Activity,
   Award,
-  Bell,
-  Fingerprint,
   UserCheck,
-  CheckCircle2,
-  Menu,
-  X,
-  ChevronDown,
+  Home,
+  Plane,
+  Wallet,
+  FileCheck,
+  Megaphone,
+  Briefcase,
+  Trophy,
+  Zap,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 
-const studentItems = [
+
+interface SubItem {
+  label: string;
+  href: string;
+}
+
+interface SidebarItem {
+  icon: any;
+  label: string;
+  href: string;
+  subItems?: SubItem[];
+}
+
+const studentItems: SidebarItem[] = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/student/dashboard" },
   { icon: UserCheck, label: "Mentorship Hub", href: "/student/mentor" },
   { icon: LayoutGrid, label: "Course Content", href: "/student/academics/courses" },
@@ -87,16 +99,35 @@ const studentItems = [
     ]
   },
   { icon: CreditCard, label: "Payments", href: "/student/payments" },
-  { icon: Settings, label: "Services", href: "/student/services",
+  { icon: GraduationCap, label: "Research Portal", href: "/student/research/profile" },
+  { icon: Home, label: "Hostel & Residency", href: "/student/hostel/details" },
+  { icon: Plane, label: "Leave & Outings", href: "/student/leaves/hub" },
+  { icon: Wallet, label: "Financials & Fees", href: "/student/finance/ledger" },
+  { icon: FileCheck, label: "Admin Services", href: "/student/services/admin" },
+  { icon: Megaphone, label: "Comm. Hub", href: "/student/communications/hub" },
+  { icon: Briefcase, label: "Career & Placements", href: "/student/career/placements" },
+  { icon: LayoutGrid, label: "Services Hub", href: "/student/services",
     subItems: [
-        { label: "Bonafide Certificate", href: "/student/services/bonafide" },
+        { label: "Academic Registration", href: "/student/academics/registration" },
+        { label: "Bonafide Certificate", href: "/student/services/admin" },
         { label: "Transcript Request", href: "/student/services/transcript" },
         { label: "Final Year Registration", href: "/student/services/final-year" },
+        { label: "Feedback Center", href: "/student/services/feedback" },
+        { label: "Library Hub", href: "/student/services/library" },
+    ]
+  },
+  { icon: Users, label: "Club Hub", href: "/student/extracurricular/clubs" },
+  { icon: Trophy, label: "vAchieve Portal", href: "/student/extracurricular/achievements" },
+  { icon: Settings, label: "Matrix Settings", href: "/settings",
+    subItems: [
+        { label: "Security Matrix", href: "/settings/security" },
+        { label: "Identity Hub", href: "/student/profile" },
+        { label: "Preferences", href: "/settings/preferences" },
     ]
   },
 ];
 
-const facultyItems = [
+const facultyItems: SidebarItem[] = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/faculty/dashboard" },
   { icon: User, label: "Profile", href: "/faculty/profile" },
   { icon: Users, label: "Mentorship Hub", href: "/faculty/mentor" },
@@ -104,26 +135,51 @@ const facultyItems = [
   { icon: ShieldCheck, label: "Mark Attendance", href: "/faculty/attendance" },
   { icon: Award, label: "Marks Upload", href: "/faculty/marks" },
   { icon: MessageCircle, label: "Messages", href: "/faculty/messages" },
+  { icon: Wallet, label: "Administrative", href: "/faculty/admin",
+    subItems: [
+        { label: "Payroll & Payslips", href: "/faculty/admin/payroll" },
+        { label: "Residency Ledger", href: "/faculty/admin/leaves" },
+        { label: "Research Portfolio", href: "/faculty/dashboard" },
+    ]
+  },
+  { icon: Settings, label: "Matrix Settings", href: "/settings",
+    subItems: [
+        { label: "Security Matrix", href: "/settings/security" },
+        { label: "Identity Hub", href: "/faculty/profile" },
+        { label: "Preferences", href: "/settings/preferences" },
+    ]
+  },
 ];
 
-const parentItems = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/parents/dashboard" },
-  { icon: User, label: "Ward Profile", href: "/parents/profile" },
-  { icon: UserCheck, label: "Ward's Mentor", href: "/parents/mentor" },
-  { icon: Calendar, label: "Ward's Schedule", href: "/parents/schedule" },
-  { icon: Activity, label: "Ward Attendance", href: "/parents/attendance" },
-  { icon: Activity, label: "Student Progress", href: "/parents/progress" },
-  { icon: CreditCard, label: "Fees & Dues", href: "/parents/payments" },
-  { icon: MessageCircle, label: "Contact Proctor", href: "/parents/proctor" },
+const parentItems: SidebarItem[] = [
+  { icon: LayoutDashboard, label: "Dashboard", href: "/parent/dashboard" },
+  { icon: User, label: "Ward Details", href: "/parent/ward-details" },
+  { icon: Calendar, label: "Ward's Schedule", href: "/parent/schedule" },
+  { icon: Activity, label: "Ward Performance", href: "/parent/performance" },
+  { icon: CreditCard, label: "Fees & Dues", href: "/parent/payments" },
+  { icon: MessageCircle, label: "Contact Proctor", href: "/parent/proctor" },
+  { icon: Settings, label: "Matrix Settings", href: "/settings",
+    subItems: [
+        { label: "Security Matrix", href: "/settings/security" },
+        { label: "Communication Prefs", href: "/settings/preferences" },
+    ]
+  },
 ];
 
-const adminItems = [
+const adminItems: SidebarItem[] = [
   { icon: Shield, label: "Control Center", href: "/admin/dashboard" },
+  { icon: Zap, label: "Engine Forge", href: "/admin/engine" },
   { icon: ShieldCheck, label: "Attendance Control", href: "/admin/attendance" },
   { icon: Users, label: "User Management", href: "/admin/users" },
   { icon: Database, label: "Database Hub", href: "/admin/database" },
-  { icon: Bell, label: "System Alerts", href: "/admin/alerts" },
   { icon: Activity, label: "System Health", href: "/admin/health" },
+  { icon: Settings, label: "Matrix Settings", href: "/settings",
+    subItems: [
+        { label: "Security Matrix", href: "/settings/security" },
+        { label: "System Alerts", href: "/admin/alerts" },
+        { label: "Audit Logs", href: "/admin/engine" },
+    ]
+  },
 ];
 
 export function Sidebar() {
@@ -167,8 +223,9 @@ export function Sidebar() {
       <div className="flex-1 py-6 px-3 space-y-1 overflow-y-auto scrollbar-hide">
         {items.map((item) => {
           const isActive = pathname === item.href
-          const hasSubItems = 'subItems' in item && Array.isArray((item as any).subItems) && (item as any).subItems.length > 0
-          const isSubActive = hasSubItems && (item as any).subItems?.some((sub: any) => pathname === sub.href)
+          const subItems = item.subItems
+          const hasSubItems = Array.isArray(subItems) && subItems.length > 0
+          const isSubActive = hasSubItems && subItems?.some((sub) => pathname === sub.href)
           
           return (
             <div key={item.label} className="space-y-1">
@@ -195,7 +252,7 @@ export function Sidebar() {
                         animate={{ opacity: 1, height: "auto" }}
                         className="pl-9 space-y-1"
                     >
-                        {(item as any).subItems?.map((sub: any) => (
+                        {subItems?.map((sub) => (
                             <Link key={sub.href} href={sub.href}>
                                 <div className={cn(
                                     "text-xs py-2 px-3 rounded-lg transition-colors",
