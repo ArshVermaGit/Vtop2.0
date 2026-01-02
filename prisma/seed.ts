@@ -17,8 +17,8 @@ async function main() {
   const facultyUser = await prisma.user.create({
     data: {
       username: 'faculty1',
-      password: 'password', // In production, hash passwords!
-      name: 'Dr. John Smith',
+      password: 'password123', // In production, hash passwords!
+      name: 'Dr. Rajesh Kumar',
       role: 'FACULTY',
       email: 'john.smith@vit.edu',
       facultyProfile: {
@@ -116,13 +116,50 @@ async function main() {
     }
   })
 
+  // 4a. Create more students for Dr. Rajesh Kumar (Proctees)
+  const procteesData = [
+    { name: 'Siddharth Nair', regNo: '21BCE1002', email: 'sid@vit.edu' },
+    { name: 'Ananya Iyer', regNo: '21BCE1003', email: 'ananya@vit.edu' },
+    { name: 'Rohan Sharma', regNo: '21BDS0042', email: 'rohan@vit.edu' },
+    { name: 'Ishani Gupta', regNo: '21BCI0015', email: 'ishani@vit.edu' },
+  ]
+
+  const createdProctees = []
+  for (const s of procteesData) {
+    const user = await prisma.user.create({
+      data: {
+        username: s.regNo.toLowerCase(),
+        password: 'password123',
+        name: s.name,
+        role: 'STUDENT',
+        email: s.email,
+        profile: {
+          create: {
+            regNo: s.regNo,
+            program: 'B.Tech CSE',
+            school: 'SCSE',
+            batch: '2021-2025',
+            cgpa: 8.5 + Math.random(),
+            proctorId: facultyProfile?.id,
+            mobile: '98765432' + Math.floor(10 + Math.random() * 90),
+          }
+        }
+      }
+    })
+    const profile = await prisma.studentProfile.findUnique({ where: { userId: user.id } })
+    if (profile) createdProctees.push(profile)
+  }
+
+
   // 5. Courses & Attendance
   const courses = [
     { code: 'CSE3002', title: 'Compiler Design', credits: 4, type: 'Theory', category: 'Program Core', slot: 'A1+TA1', venue: 'AB1-202', syllabusUrl: '#' },
     { code: 'CSE3001', title: 'Network Security', credits: 3, type: 'Theory', category: 'Program Core', slot: 'B1+TB1', venue: 'AB1-203', syllabusUrl: '#' },
     { code: 'CSE3005', title: 'Machine Learning', credits: 4, type: 'Theory', category: 'Program Elective', slot: 'C1+TC1', venue: 'AB1-204', syllabusUrl: '#' },
     { code: 'ENG1001', title: 'Professional Communication', credits: 2, type: 'Theory', category: 'University Core', slot: 'D1+TD1', venue: 'AB2-101', syllabusUrl: '#' },
+    { code: 'CSE4001', title: 'Deep Learning', credits: 4, type: 'Theory', category: 'Program Elective', slot: 'E1+TE1', venue: 'AB1-502', syllabusUrl: '#' },
   ]
+
 
   for (const c of courses) {
     const course = await prisma.course.create({
@@ -280,6 +317,45 @@ async function main() {
                   }
               })
           }
+      }
+
+      // Seed TimeTable for Dr. Rajesh Kumar's courses
+      const days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY']
+      await prisma.timeTable.create({
+          data: {
+              studentId: studentProfile.id,
+              courseId: course.id,
+              day: days[Math.floor(Math.random() * days.length)],
+              startTime: '08:00 AM',
+              endTime: '08:50 AM',
+              venue: course.venue || 'AB1-202',
+              slot: course.slot || 'A1'
+          }
+      })
+
+      // Also register created proctees to these courses
+      for (const proctee of createdProctees) {
+          await prisma.courseRegistration.upsert({
+              where: { studentId_courseId: { studentId: proctee.id, courseId: course.id } },
+              update: {},
+              create: {
+                  studentId: proctee.id,
+                  courseId: course.id,
+                  status: 'REGISTERED',
+                  sem: 'Winter 2024-25'
+              }
+          })
+
+          // Also seed attendance for proctees
+          await prisma.attendance.create({
+              data: {
+                  studentId: proctee.id,
+                  courseId: course.id,
+                  attendedClasses: 28,
+                  totalClasses: 32,
+                  percentage: 87.5
+              }
+          })
       }
     }
   }
