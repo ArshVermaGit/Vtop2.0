@@ -127,12 +127,27 @@ export function LoginBox() {
               </Button>
             </form>
 
-            <TabsContent value="faculty" className="text-center text-sm text-gray-500 mt-4">
-              Faculty login is restricted to authorized personnel only.
-            </TabsContent>
-             <TabsContent value="parent" className="text-center text-sm text-gray-500 mt-4">
-              Parent portal access requires mobile verification.
-            </TabsContent>
+            <div className="mt-8 p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+              <p className="text-[10px] text-gray-500 uppercase font-black tracking-widest text-center italic border-b border-white/5 pb-2">Demo Credentials HUB</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <p className="text-[9px] text-blue-400 font-bold uppercase">Student</p>
+                  <code className="text-[10px] text-gray-400 block">student1 / password</code>
+                </div>
+                <div className="space-y-1 text-right">
+                  <p className="text-[9px] text-purple-400 font-bold uppercase">Faculty</p>
+                  <code className="text-[10px] text-gray-400 block">faculty1 / password123</code>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-[9px] text-emerald-400 font-bold uppercase">Parent</p>
+                  <code className="text-[10px] text-gray-400 block">parent1 / password</code>
+                </div>
+                <div className="space-y-1 text-right">
+                  <p className="text-[9px] text-rose-400 font-bold uppercase">Admin</p>
+                  <code className="text-[10px] text-gray-400 block">admin / password</code>
+                </div>
+              </div>
+            </div>
           </Tabs>
         </CardContent>
         <CardFooter className="flex justify-center border-t border-white/5 pt-6 pb-6">
