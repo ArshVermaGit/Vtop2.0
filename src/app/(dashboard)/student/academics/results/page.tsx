@@ -17,7 +17,7 @@ export default async function AcademicPerformancePage() {
           <h1 className="text-3xl font-bold text-white tracking-tight flex items-center gap-3">
              <GraduationCap className="w-8 h-8 text-amber-500" /> Academic Performance
           </h1>
-          <p className="text-gray-400 mt-1">Winter Semester 2025-26 • Holistic Result Analytics</p>
+          <p className="text-gray-400 mt-1">Winter Semester 2026-27 • Holistic Result Analytics</p>
         </div>
         <div className="flex items-center gap-3">
              <Link href="/student/academics/grades">
