@@ -40,7 +40,7 @@ export default async function FinancialLedgerPage() {
               </CardHeader>
               <CardContent>
                   <div className="flex items-center gap-2 text-rose-400 text-[10px] font-bold uppercase">
-                      <AlertCircle className="w-3.5 h-3.5" /> Due by Jan 31, 2025
+                      <AlertCircle className="w-3.5 h-3.5" /> Due by Jan 31, 2026
                   </div>
               </CardContent>
           </Card>
