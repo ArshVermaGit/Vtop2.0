@@ -1558,7 +1558,7 @@ export async function triggerNotification(target: 'EMAIL' | 'SMS', message: stri
   if (!session?.user) throw new Error("Unauthorized")
 
   return await NotifyEngine.sendNotification(target, {
-      to: (session.user as any).email || (session.user as any).mobile || "user@vit.edu",
+      to: (session.user as any).email || (session.user as any).mobile || "user@university.edu",
       subject: "VTOP 2.0 Institutional Alert",
       message: message
   })
