@@ -8,9 +8,9 @@ import { Search, Mail, Phone, Users } from "lucide-react"
 
 export default function FacultyInfoPage() {
   const faculty = [
-    { name: "Dr. Priya V.", school: "SCOPE", cabin: "AB1-405", email: "priya.v@vitbhopal.ac.in", designation: "Asst. Prof Sr." },
-    { name: "Dr. Ankit Kumar", school: "SCSE", cabin: "AB1-202", email: "ankit.k@vitbhopal.ac.in", designation: "Assoc. Prof" },
-    { name: "Dr. S. Sharma", school: "SAS", cabin: "AB2-101", email: "s.sharma@vitbhopal.ac.in", designation: "Professor" },
+    { name: "Dr. Priya V.", school: "SCOPE", cabin: "AB1-405", email: "priya.v@university.edu", designation: "Asst. Prof Sr." },
+    { name: "Dr. Ankit Kumar", school: "SCSE", cabin: "AB1-202", email: "ankit.k@university.edu", designation: "Assoc. Prof" },
+    { name: "Dr. S. Sharma", school: "SAS", cabin: "AB2-101", email: "s.sharma@university.edu", designation: "Professor" },
   ]
 
   return (
