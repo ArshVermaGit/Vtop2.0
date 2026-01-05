@@ -28,7 +28,7 @@ export default async function ExamDashboardPage() {
           <h1 className="text-3xl font-bold text-white tracking-tight flex items-center gap-3">
              <ShieldCheck className="w-8 h-8 text-indigo-500" /> Examination Dashboard
           </h1>
-          <p className="text-gray-400 mt-1">Winter Semester 2025-26 • Assessment Schedule & Credentials</p>
+          <p className="text-gray-400 mt-1">Winter Semester 2026-27 • Assessment Schedule & Credentials</p>
         </div>
         <div className="flex items-center gap-3">
              <Link href="/student/academics/exams/hall-ticket">
