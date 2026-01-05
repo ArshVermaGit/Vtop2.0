@@ -152,7 +152,7 @@ export function LoginBox() {
         </CardContent>
         <CardFooter className="flex justify-center border-t border-white/5 pt-6 pb-6">
           <p className="text-xs text-gray-500">
-            © 2025 VIT Bhopal • <a href="#" className="hover:text-gray-300">Privacy</a>
+            © 2026 VTOP System • <a href="#" className="hover:text-gray-300">Privacy</a>
           </p>
         </CardFooter>
       </Card>
