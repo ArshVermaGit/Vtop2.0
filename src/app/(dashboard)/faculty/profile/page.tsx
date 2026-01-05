@@ -117,7 +117,7 @@ export default async function FacultyProfilePage() {
                                 <p className="text-white font-mono">{profile.mobile}</p>
                             </div>
                             <div className="space-y-1">
-                                <p className="text-[10px] text-gray-500 uppercase">VIT Mail ID</p>
+                                <p className="text-[10px] text-gray-500 uppercase">Official Mail ID</p>
                                 <p className="text-white font-medium truncate">{profile.user.email}</p>
                             </div>
                         </CardContent>
@@ -167,7 +167,7 @@ export default async function FacultyProfilePage() {
                 <CardContent className="space-y-6">
                     <div className="p-6 rounded-2xl bg-black/40 border border-white/5 text-sm text-gray-400 leading-relaxed">
                         <h4 className="text-white font-bold mb-4">Professional Ethics Declaration</h4>
-                        <p className="mb-4">I, <strong>{profile.user.name}</strong>, employee ID <strong>{profile.empId}</strong>, hereby declare that I will uphold the highest standards of academic integrity and professional ethics as prescribed by VIT Bhopal University.</p>
+                        <p className="mb-4">I, <strong>{profile.user.name}</strong>, employee ID <strong>{profile.empId}</strong>, hereby declare that I will uphold the highest standards of academic integrity and professional ethics as prescribed by the University.</p>
                         <p className="mb-4">I acknowledge my responsibility as a mentor and educator to provide fair assessment and guidance to all students without bias.</p>
                     </div>
                     <div className="flex items-center gap-3 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
