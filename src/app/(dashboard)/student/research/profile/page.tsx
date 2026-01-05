@@ -110,7 +110,7 @@ export default async function ResearchProfilePage() {
                                 { title: "Course Work", date: "June 2022", status: "completed" },
                                 { title: "Research Proposal", date: "Jan 2023", status: "completed" },
                                 { title: "Mid-Term Review", date: "Nov 2023", status: "completed" },
-                                { title: "Synopsis Submission", date: "Anticipated Dec 2025", status: "pending" },
+                                { title: "Synopsis Submission", date: "Anticipated Dec 2026", status: "pending" },
                             ].map((step, idx) => (
                                 <div key={idx} className="flex items-center gap-6 pl-10 h-10 group">
                                     <div className={`absolute left-2.5 w-3 h-3 rounded-full border-2 border-black z-10 ${step.status === 'completed' ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]' : 'bg-white/20'}`} />
