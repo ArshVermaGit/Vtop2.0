@@ -23,7 +23,7 @@ export default async function GradeHistoryPage() {
           <h1 className="text-3xl font-bold text-white tracking-tight flex items-center gap-3">
              <History className="w-8 h-8 text-indigo-500" /> Grade Ledger
           </h1>
-          <p className="text-gray-400 mt-1">Official Semester-wise Academic Record (2021-2025)</p>
+          <p className="text-gray-400 mt-1">Official Semester-wise Academic Record (2022-2026)</p>
         </div>
         <div className="flex items-center gap-3">
              <Button variant="outline" className="border-white/10 text-gray-400 hover:text-white h-10 px-6 uppercase text-[10px] font-black tracking-widest">
