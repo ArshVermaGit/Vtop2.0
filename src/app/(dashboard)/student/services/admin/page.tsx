@@ -147,7 +147,7 @@ export default async function AdminServicesPage() {
                      <div className="grid grid-cols-2 gap-4 border-t border-white/20 pt-4">
                         <div>
                              <p className="text-[8px] text-white/50 uppercase font-black">Valid Until</p>
-                             <p className="text-[10px] text-white font-bold">{idCard ? new Date(idCard.validUntil).toLocaleDateString() : '30-JUN-2025'}</p>
+                             <p className="text-[10px] text-white font-bold">{idCard ? new Date(idCard.validUntil).toLocaleDateString() : '30-JUN-2026'}</p>
                         </div>
                         <div className="text-right">
                              <p className="text-[8px] text-white/50 uppercase font-black">Status</p>
