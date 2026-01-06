@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Calendar, MapPin, Clock, ShieldCheck, Search, Download, ExternalLink, Info, AlertTriangle } from "lucide-react"
+import { MapPin, Clock, ShieldCheck, Download, ExternalLink, Info, AlertTriangle } from "lucide-react"
 import { getExamSchedules, getSeatAllocations, getHallTicketEligibility } from "@/lib/actions"
 import { format } from "date-fns"
 import Link from "next/link"
@@ -72,7 +72,7 @@ export default async function ExamDashboardPage() {
                     </div>
                  ) : (
                     <div className="grid grid-cols-1 gap-4">
-                        {exams.map((exam: any) => {
+                        {exams.map((exam: { id: string; examDate: string | number | Date; courseCode: string; courseTitle: string; slot: string; venue: string }) => {
                             const allocation = allocations.find(a => a.examScheduleId === exam.id)
                             return (
                                 <Card key={exam.id} className="bg-white/5 border-white/10 overflow-hidden group hover:border-indigo-500/30 transition-all">
