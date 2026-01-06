@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { Eye, EyeOff, Lock, User, ArrowRight } from "lucide-react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
@@ -52,7 +53,16 @@ export function LoginBox() {
       className="w-full max-w-md"
     >
       <Card className="border-white/10 bg-black/40 backdrop-blur-xl shadow-2xl">
-        <CardHeader className="space-y-1 text-center">
+        <CardHeader className="space-y-4 text-center">
+          <div className="flex justify-center">
+            <Image 
+                src="/logo.png" 
+                alt="VTOP Logo" 
+                width={80} 
+                height={80} 
+                className="rounded-2xl shadow-2xl shadow-blue-500/20"
+            />
+          </div>
           <CardTitle className="text-3xl font-bold tracking-tight bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             VTOP 2.0
           </CardTitle>
