@@ -46,7 +46,7 @@ export default async function ExamDashboardPage() {
             <div className="space-y-1">
                 <h4 className="text-rose-400 font-bold text-sm uppercase tracking-wider">Hall Ticket Blocked</h4>
                 <p className="text-gray-400 text-xs leading-relaxed">
-                    You are not eligible to download the hall ticket due to <span className="font-bold text-rose-500">{eligibility.reason}</span>. 
+                    You are not eligible to download the hall ticket due to <span className="font-bold text-rose-500">{eligibility.blockers?.join(', ') || 'policy violations'}</span>. 
                     Please contact the academic office or clear pending dues.
                 </p>
             </div>
