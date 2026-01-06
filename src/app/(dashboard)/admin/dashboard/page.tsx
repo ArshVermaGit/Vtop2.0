@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Database, Users, Shield, Zap, Activity, Globe, GraduationCap, Briefcase } from "lucide-react"
+import { Database, Users, Shield, Zap, GraduationCap, Briefcase } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getAdminDashboardData } from "@/lib/admin-actions"
 
@@ -89,7 +89,7 @@ export default async function AdminDashboard() {
               </CardTitle>
            </CardHeader>
            <CardContent className="space-y-6">
-              {logs.length > 0 ? logs.map((log: any, i: number) => (
+              {logs.length > 0 ? logs.map((log: { event: string; user?: { name: string }; userId: string; timestamp: string | number | Date }, i: number) => (
                 <div key={i} className="flex gap-4 items-start">
                    <div className="w-1 h-8 bg-blue-500/20 rounded-full" />
                    <div className="overflow-hidden">
