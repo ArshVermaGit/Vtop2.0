@@ -18,7 +18,8 @@ export const authOptions: NextAuthOptions = {
           where: { username: credentials.username }
         });
 
-        // In a real app, use bcrypt to compare passwords
+        console.log('Auth attempt for:', credentials.username, user ? 'User Found' : 'User NOT Found');
+
         if (user && user.password === credentials.password) {
           return {
             id: user.id,
@@ -28,6 +29,7 @@ export const authOptions: NextAuthOptions = {
           };
         }
         
+        console.warn('Auth failed for:', credentials.username);
         return null;
       }
     })
