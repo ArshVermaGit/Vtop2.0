@@ -368,11 +368,11 @@ export function Sidebar() {
               </div>
             )}
             {isCollapsed ? (
-               <Button variant="ghost" size="icon" onClick={() => signOut()} className="text-rose-500 hover:bg-rose-500/10">
+               <Button variant="ghost" size="icon" onClick={() => signOut({ callbackUrl: "/" })} className="text-rose-500 hover:bg-rose-500/10">
                   <LogOut size={20} />
                </Button>
             ) : (
-              <Button variant="ghost" size="icon" onClick={() => signOut()} className="text-gray-500 hover:text-rose-500 hover:bg-rose-500/10 h-8 w-8 ml-2">
+              <Button variant="ghost" size="icon" onClick={() => signOut({ callbackUrl: "/" })} className="text-gray-500 hover:text-rose-500 hover:bg-rose-500/10 h-8 w-8 ml-2">
                 <LogOut size={16} />
               </Button>
             )}
