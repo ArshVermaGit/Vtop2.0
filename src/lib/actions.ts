@@ -13,7 +13,7 @@ export async function getStudentProfile() {
 
   return await prisma.studentProfile.findFirst({
     where: {
-      userId: (session.user as any).id
+      userId: session.user.id
     },
     include: {
       proctor: {
@@ -306,7 +306,7 @@ export async function getAcademicPerformance() {
   const cgpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : "0.00"
 
   // Semester-wise grouping
-  const semesterWise = history.reduce((acc: any, curr) => {
+  const semesterWise = history.reduce((acc: Record<string, { credits: number, points: number, courses: any[] }>, curr) => {
     if (!acc[curr.semester]) {
       acc[curr.semester] = { credits: 0, points: 0, courses: [] }
     }
@@ -351,7 +351,7 @@ export async function getFacultyProfile() {
 
   return await prisma.facultyProfile.findUnique({
     where: {
-      userId: (session.user as any).id
+      userId: session.user.id
     },
     include: {
       user: true,
@@ -386,7 +386,7 @@ export async function getParentProfile() {
 
   return await prisma.parentProfile.findUnique({
     where: {
-      userId: (session.user as any).id
+      userId: session.user.id
     },
     include: {
       user: true
