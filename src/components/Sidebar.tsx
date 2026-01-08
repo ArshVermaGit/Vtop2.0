@@ -49,22 +49,20 @@ interface SidebarItem {
 
 const studentItems: SidebarItem[] = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/student/dashboard" },
-  { icon: ClipboardList, label: "Time Table", href: "/student/timetable" },
-  { icon: UserCheck, label: "Attendance", href: "/student/attendance" },
-  { icon: Award, label: "Marks Hub", href: "/student/marks" },
-  { icon: BookOpen, label: "Course Plan", href: "/student/courses" },
-  { icon: MapPin, label: "Campus Map", href: "/student/map" },
-  { icon: History, label: "Academics", href: "/student/history" },
-  { icon: MessageCircle, label: "V-Topia", href: "/student/forum" },
+  { icon: ClipboardList, label: "Time Table", href: "/student/academics/timetable" },
+  { icon: UserCheck, label: "Attendance", href: "/student/academics/attendance" },
+  { icon: Award, label: "Marks Hub", href: "/student/academics/marks" },
+  { icon: BookOpen, label: "Course Plan", href: "/student/academics/courses" },
+  { icon: History, label: "Academics", href: "/student/academics/grade-history" },
+  { icon: MessageCircle, label: "V-Topia", href: "/student/communications/hub" },
 ];
 
 const facultyItems: SidebarItem[] = [
   { icon: LayoutGrid, label: "Academic Hub", href: "/faculty/dashboard" },
-  { icon: ClipboardList, label: "Duty Chart", href: "/faculty/timetable" },
+  { icon: ClipboardList, label: "Duty Chart", href: "/faculty/schedule" },
   { icon: UserCheck, label: "Roll Call", href: "/faculty/attendance" },
   { icon: Award, label: "Grade Center", href: "/faculty/marks" },
-  { icon: BookOpen, label: "My Queries", href: "/faculty/queries" },
-  { icon: History, label: "Log Registry", href: "/faculty/history" },
+  { icon: History, label: "Log Registry", href: "/faculty/admin/leaves" },
 ];
 
 const parentItems: SidebarItem[] = [
