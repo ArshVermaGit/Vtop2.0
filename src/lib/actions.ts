@@ -1,7 +1,7 @@
 "use server"
 
 import prisma from "@/lib/prisma"
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 import * as DocumentEngine from "@/lib/engine/docs"
 import * as SyncEngine from "@/lib/engine/sync"
