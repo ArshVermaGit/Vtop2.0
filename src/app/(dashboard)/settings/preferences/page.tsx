@@ -1,4 +1,4 @@
-import { getStudentProfile, getFacultyProfile } from "@/lib/actions"
+import { getStudentProfile, getFacultyProfile, getParentProfile } from "@/lib/actions"
 import { PreferencesForm } from "@/components/settings/PreferencesForm"
 import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth/next"
@@ -14,6 +14,12 @@ export default async function PreferencesPage() {
 
   if (session.user.role === 'FACULTY') {
       const profile = await getFacultyProfile()
+      if (profile) {
+          email = profile.user.email || "N/A"
+          mobile = profile.mobile || "N/A"
+      }
+  } else if (session.user.role === 'PARENT') {
+      const profile = await getParentProfile()
       if (profile) {
           email = profile.user.email || "N/A"
           mobile = profile.mobile || "N/A"
