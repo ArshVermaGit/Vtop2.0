@@ -1,18 +1,35 @@
-import { getStudentProfile } from "@/lib/actions"
+import { getStudentProfile, getFacultyProfile } from "@/lib/actions"
 import { PreferencesForm } from "@/components/settings/PreferencesForm"
 import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/lib/auth"
 
 export default async function PreferencesPage() {
-  const profile = await getStudentProfile()
+  const session = await getServerSession(authOptions)
   
-  if (!profile) {
-    redirect("/")
+  if (!session?.user) redirect("/")
+
+  let email = "N/A"
+  let mobile = "N/A"
+
+  if (session.user.role === 'FACULTY') {
+      const profile = await getFacultyProfile()
+      if (profile) {
+          email = profile.user.email || "N/A"
+          mobile = profile.mobile || "N/A"
+      }
+  } else {
+      const profile = await getStudentProfile()
+      if (profile) {
+          email = profile.user.email || "N/A"
+          mobile = profile.mobile || "N/A"
+      }
   }
 
   return (
     <PreferencesForm 
-      email={profile.user.email || "N/A"} 
-      mobile={profile.mobile || "N/A"} 
+      email={email} 
+      mobile={mobile} 
     />
   )
 }
