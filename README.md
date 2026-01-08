@@ -1,222 +1,220 @@
 <div align="center">
-  <img src="public/logo.png" alt="VTOP 2.0" width="180" />
+  <img src="public/logo.png" alt="VTOP 2.0 Logo" width="180" />
   
   # ⚡ VTOP 2.0
   
-  **The University Portal That Doesn't Make You Cry**
+  **The Next-Generation University Management Portal**
   
-  <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js" />
-  <img src="https://img.shields.io/badge/React-19-00D8FF?style=for-the-badge&logo=react" />
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript" />
-  <img src="https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma" />
+  <p align="center">
+    <a href="https://nextjs.org"><img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js" /></a>
+    <a href="https://react.dev"><img src="https://img.shields.io/badge/React-19-00D8FF?style=for-the-badge&logo=react" /></a>
+    <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript-5.9-007ACC?style=for-the-badge&logo=typescript" /></a>
+    <a href="https://www.prisma.io"><img src="https://img.shields.io/badge/Prisma-5.15-2D3748?style=for-the-badge&logo=prisma" /></a>
+    <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css" /></a>
+  </p>
   
-  *From cluttered 90s nightmare → Obsidian Glass elegance*
+  *Abandoning legacy clutter for Obsidian Glass elegance, speed, and usability.*
 </div>
 
 ---
 
-## 🎯 The Problem
+## 🎯 The Vision
 
-Legacy university portals feel like archaeological artifacts. Finding your exam schedule shouldn't require a treasure map.
+University portals are historically clunky, slow, and confusing. **VTOP 2.0** completely reimagines the academic digital experience. It is not just an upgrade; it is a ground-up rewrite designed to be:
 
-**VTOP 2.0** is the complete rewrite nobody asked for, but everyone desperately needed.
-
----
-
-## ✨ What's Different?
-
-<table>
-<tr>
-<td>❌ <strong>Before</strong></td>
-<td>✅ <strong>After</strong></td>
-</tr>
-<tr>
-<td>
-
-```
-Confusing navigation
-Scattered information
-1999 design language
-Mobile? Never heard of it
-```
-
-</td>
-<td>
-
-```
-Intuitive role-based dashboards
-Everything unified
-Obsidian Glass aesthetic
-Mobile-first, buttery smooth
-```
-
-</td>
-</tr>
-</table>
+- **Unified**: One ecosystem for Students, Faculty, Parents, and Admins.
+- **Beautiful**: A cohesive "Obsidian Glass" design language that makes academic monitoring a visual treat.
+- **Fast**: Built on the bleeding edge of web technology for instant interactions.
+- **Secure**: Role-Based Access Control (RBAC) ensuring data integrity and privacy.
 
 ---
 
-## 🎭 Four Portals, One Ecosystem
+## 🎭 The Four Pillars (Portals)
 
-### 🎓 Student Nexus
-Your academic command center. Timetables, attendance, grades, research tracking, hostel management, and digital hall tickets—all in one place.
+### 🎓 Student Nexus (`/student`)
 
-### 👨‍🏫 Faculty Cabin
-Teaching made simple. Schedule management, one-tap attendance, grade uploads, and mentorship tools that actually work.
+The complete digital life of a student, unified.
 
-### 🛡️ Admin Oracle
-God mode for administrators. System health monitoring, user management, analytics, and university-wide control.
+- **Dashboard**: Real-time overview of classes, attendance, and GPA.
+- **Time Table**: Dynamic schedule with venue and faculty details.
+- **Attendance**: Detailed log tracking with percentage calculators.
+- **Marks Hub**: Comprehensive assessment history (CAT, FAT, Assignments).
+- **Course Plan**: Curriculum tracking and credit management.
+- **V-Topia**: Campus communication and digital community hub.
 
-### 👪 Parent Guardian
-Peace of mind portal. Real-time ward monitoring, direct communication with proctors, and complete financial transparency.
+### 👨‍🏫 Faculty Cabin (`/faculty`)
+
+Tools that empower educators, not hinder them.
+
+- **Academic Hub**: Overview of appointed courses and daily schedule.
+- **Duty Chart**: Exam proctoring and administrative duty tracking.
+- **Roll Call**: Fast, mobile-friendly attendance marking system.
+- **Grade Center**: Streamlined marks entry and submission interface.
+- **Log Registry**: Historical record of student interactions and leave management.
+
+### � Parent Guardian (`/parent`)
+
+Transparency and peace of mind for guardians.
+
+- **Ward Status**: Real-time academic performance monitoring.
+- **Ward Attendance**: Daily attendance updates and alerts.
+- **Academic Report**: Detailed breakdown of grades and progress.
+- **Fee Portal**: Payment history and outstanding due tracking.
+- **Direct Connect**: Communication channel with faculty proctors.
+
+### 🛡️ Admin Oracle (`/admin`)
+
+God-mode control for university management.
+
+- **Control Center**: System-wide health matrix and vital statistics.
+- **Identity Hub**: User provisioning (Student, Faculty, Parent) and credential management.
+- **Master Registry**: Global database explorer and editor.
+- **Attendance Control**: Override and audit student attendance records.
+- **Course Manager**: Curriculum design, course creation, and faculty allocation.
+- **Financial Hub**: Global fee and payment tracking.
 
 ---
 
-## 🎨 The Aesthetic
+## 🎨 The Aesthetic: Obsidian Glass
 
-**Obsidian Glass Design Language**
+VTOP 2.0 introduces a custom design system focused on depth, clarity, and motion.
 
-- 🌌 Frosted glass panels with backdrop blur
-- ⚡ Fluid physics-based animations
-- 🎯 Ambient mesh gradients that breathe
-- 📱 Pixel-perfect on every screen size
-- ♿ WCAG 2.1 AA accessible
-
----
-
-## 🚀 Tech Stack
-
-Built on bleeding-edge technology that actually scales:
-
-```
-Next.js 16 (App Router) → React 19 → TypeScript 5.9
-                    ↓
-              Prisma ORM
-                    ↓
-             PostgreSQL
-                    ↓
-        NextAuth.js + Tailwind CSS + Framer Motion
-```
-
-**Why?** Server Components for speed, type-safety for sanity, Prisma for elegant database queries, and Framer Motion for animations that don't tank performance.
+- **Glassmorphism**: Layered translucency for hierarchical depth.
+- **Ambient Lighting**: Dynamic gradients that breathe with the interface.
+- **Motion Design**: Physics-based transitions using Framer Motion.
+- **Responsive**: A mathematically consistent grid ensuring pixel perfection from 4k monitors to smartphones.
 
 ---
 
-## ⚡ Quick Start
+## 🚀 Technology Stack
+
+Built on a modern, type-safe architecture designed for scale.
+
+| Layer        | Technology                                        | Description                                   |
+| ------------ | ------------------------------------------------- | --------------------------------------------- |
+| **Core**     | [Next.js 16](https://nextjs.org/)                 | App Router, Server Components, Server Actions |
+| **Logic**    | [React 19](https://react.dev/)                    | Concurrent features, Hooks                    |
+| **Language** | [TypeScript 5.9](https://www.typescriptlang.org/) | Strict type safety across the entire stack    |
+| **Database** | [PostgreSQL](https://www.postgresql.org/)         | Relational data integrity                     |
+| **ORM**      | [Prisma](https://www.prisma.io/)                  | Type-safe database queries and migrations     |
+| **Auth**     | [NextAuth.js](https://next-auth.js.org/)          | Secure, session-based authentication          |
+| **Styling**  | [Tailwind CSS](https://tailwindcss.com/)          | Utility-first styling engine                  |
+| **UI Lib**   | [Radix UI](https://www.radix-ui.com/)             | Accessible, unstyled component primitives     |
+| **Motion**   | [Framer Motion](https://www.framer.com/motion/)   | Production-ready animation library            |
+
+---
+
+## ⚡ Getting Started
+
+### Prerequisites
+
+- Node.js 18+ (LTS recommended)
+- PostgreSQL Database URL
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/ArshVermaGit/Vtop2.0.git
+   cd Vtop2.0
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment**
+   Create a `.env` file in the root directory:
+
+   ```env
+   # Database Connection
+   DATABASE_URL="postgresql://user:password@localhost:5432/vtop2?schema=public"
+
+   # Authentication
+   NEXTAUTH_SECRET="your-super-secret-key-at-least-32-chars"
+   NEXTAUTH_URL="http://localhost:3000"
+   ```
+
+4. **Initialize Database**
+
+   ```bash
+   npx prisma generate
+   npx prisma db push
+
+   # Seed with initial admin/test data
+   npm run seed
+   ```
+
+5. **Launch Development Server**
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:3000` to access the portal.
+
+---
+
+## 📁 Project Structure
 
 ```bash
-# Clone
-git clone https://github.com/ArshVermaGit/Vtop2.0.git
-cd Vtop2.0
-
-# Install
-npm install
-
-# Configure
-cp .env.example .env
-# Add your DATABASE_URL and NEXTAUTH_SECRET
-
-# Database
-npx prisma generate
-npx prisma db push
-npm run seed  # Optional: sample data
-
-# Launch
-npm run dev
-```
-
-Visit `http://localhost:3000` → Witness the magic ✨
-
----
-
-## 📁 Structure
-
-```
 src/
-├── app/
-│   ├── (auth)/          # Login & registration
-│   ├── (dashboard)/     # Student, Faculty, Admin, Parent portals
-│   └── api/             # Server endpoints
-├── components/
-│   ├── ui/              # 30+ custom Obsidian components
-│   └── widgets/         # Role-specific dashboard widgets
-├── lib/
-│   ├── actions.ts       # 100+ server actions
-│   ├── auth.ts          # NextAuth config
-│   └── prisma.ts        # Database client
-└── prisma/
-    └── schema.prisma    # 40+ models
+├── app/                  # Next.js App Router
+│   ├── (auth)/           # Authentication routes (Login)
+│   ├── (dashboard)/      # Protected dashboard routes
+│   │   ├── admin/        # Admin portal pages
+│   │   ├── faculty/      # Faculty portal pages
+│   │   ├── parent/       # Parent portal pages
+│   │   ├── student/      # Student portal pages
+│   │   └── settings/     # Global user settings
+│   └── api/              # Server-side API endpoints
+├── components/           # React Components
+│   ├── admin/            # Admin-specific widgets
+│   ├── faculty/          # Faculty-specific widgets
+│   ├── parent/           # Parent-specific widgets
+│   ├── student/          # Student-specific widgets
+│   ├── ui/               # Reusable UI primitives (Buttons, Cards, etc.)
+│   ├── Sidebar.tsx       # Dynamic role-based navigation
+│   └── LoginBox.tsx      # Auth entry point
+├── lib/                  # Utilities
+│   ├── actions.ts        # Server Actions (Data mutations)
+│   ├── admin-actions.ts  # Admin-specific server actions
+│   ├── prisma.ts         # DB client singleton
+│   └── utils.ts          # Helper functions
+├── types/                # TypeScript definitions
+└── prisma/               # Database Schema & Seeds
 ```
-
----
-
-## 🎯 Core Features
-
-**🔐 Auth & Access** — Multi-role JWT system, RBAC, secure sessions  
-**📊 Student Hub** — Attendance, grades, courses, research tracking  
-**👨‍🏫 Faculty Tools** — Teaching schedules, grade management, proctee monitoring  
-**🏫 Admin Control** — User management, system health, analytics  
-**💰 Finance** — Fee tracking, payment history, receipt generation  
-**🏠 Hostel** — Room allocation, mess menus, maintenance tickets  
-**📚 Library** — Book management, due tracking, fine calculation  
-
----
-
-## 🌟 Performance
-
-```
-Lighthouse Score: 98/100 ⚡
-First Paint: <100ms
-Time to Interactive: <1s
-```
-
-No compromises. Just speed.
-
----
-
-## 🛣️ Roadmap
-
-- [ ] 🤖 AI-powered course recommendations
-- [ ] 📱 Native mobile apps
-- [ ] 🌐 Multi-language support
-- [ ] 🎓 Alumni portal
-- [ ] 📊 Predictive analytics
 
 ---
 
 ## 🤝 Contributing
 
-Found a bug? Want to add a feature? PRs welcome!
+We welcome contributions to make VTOP 2.0 even better.
 
-1. Fork it
-2. Create your feature branch (`git checkout -b feature/CoolFeature`)
-3. Commit changes (`git commit -m 'Add CoolFeature'`)
-4. Push to branch (`git push origin feature/CoolFeature`)
-5. Open a Pull Request
+1. **Fork** the repository.
+2. Create a **Feature Branch** (`git checkout -b feature/AmazingFeature`).
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`).
+4. **Push** to the branch (`git push origin feature/AmazingFeature`).
+5. Open a **Pull Request**.
 
 ---
 
 ## 👨‍💻 Creator
 
 **Arsh Verma**  
-*Full Stack Architect | UI/UX Perfectionist*
+_Full Stack Architect • UI/UX Perfectionist_
 
-Built with ❤️, TypeScript, and way too much coffee.
-
-[GitHub](https://github.com/ArshVermaGit) • [LinkedIn](https://linkedin.com/in/arshverma) • [Portfolio](https://arshverma.dev)
+Built with passion and too much coffee.  
+[GitHub](https://github.com/ArshVermaGit) • [LinkedIn](https://linkedin.com/in/arshverma)
 
 ---
 
 ## 📜 License
 
-MIT — Use it, modify it, share it. Just don't sue me 😉
-
----
+Distributed under the MIT License. See `LICENSE` for more information.
 
 <div align="center">
-  
-  **⭐ Star this repo if it saved your sanity!**
-  
-  *© 2026 VTOP 2.0 — Engineering Better Campuses*
-  
+  <br />
+  <strong>Built for the future of education.</strong>
 </div>
