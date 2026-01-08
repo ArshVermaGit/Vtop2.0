@@ -8,6 +8,10 @@ export default async function SettingsProfileRedirect() {
   if (session?.user?.role === 'FACULTY') {
     redirect("/faculty/profile")
   }
+
+  if (session?.user?.role === 'PARENT') {
+    redirect("/parent/profile")
+  }
   
   redirect("/student/profile")
 }
