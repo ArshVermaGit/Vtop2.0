@@ -1,11 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { 
-  User, 
   Users, 
   Calendar, 
   Clock, 
-  CheckCircle2, 
   AlertTriangle, 
   BookOpen, 
   GraduationCap, 
@@ -21,6 +19,33 @@ import { getFacultyDashboardData, getAcademicEvents } from "@/lib/actions"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
+interface MetricCardProps {
+  label: string;
+  value: string | number;
+  subtitle: string;
+  icon: React.ReactNode;
+  status: string;
+  color: 'indigo' | 'rose' | 'emerald' | 'purple';
+}
+
+interface ResearchStatProps {
+  label: string;
+  value: string | number;
+  color: 'indigo' | 'emerald' | 'purple' | 'amber';
+}
+
+interface ToolButtonProps {
+  icon: React.ReactNode;
+  label: string;
+  color: 'indigo' | 'amber' | 'emerald' | 'purple';
+}
+
+interface PulseItemProps {
+  label: string;
+  time: string;
+  floor: string;
+}
+
 export default async function FacultyDashboard() {
   const faculty = await getFacultyDashboardData()
   const events = await getAcademicEvents()
@@ -28,13 +53,17 @@ export default async function FacultyDashboard() {
   if (!faculty) return <div className="p-10 text-white font-black uppercase text-xs">Unauthorized or Faculty Profile not found.</div>
 
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase()
-  const todayClasses = faculty.courses.flatMap((c: any) =>
-    c.timeTable.filter((t: any) => t.day === today).map((t: any) => ({ ...t, course: c }))
-  ).sort((a: any, b: any) => a.startTime.localeCompare(b.startTime))
+  
+  // Type-safe todayClasses calculation
+  const todayClasses = faculty.courses.flatMap((c) =>
+    c.timeTable
+      .filter((t) => t.day === today)
+      .map((t) => ({ ...t, course: c }))
+  ).sort((a, b) => a.startTime.localeCompare(b.startTime))
 
   const totalProctees = faculty.proctees.length
-  const criticalProctees = faculty.proctees.filter((p: any) =>
-    (p.attendance?.[0]?.percentage || 100) < 75 || p.cgpa < 7.5
+  const criticalProctees = faculty.proctees.filter((p) =>
+    (p.attendance?.[0]?.percentage || 100) < 75 || (p.cgpa || 0) < 7.5
   ).length
 
   return (
@@ -45,7 +74,7 @@ export default async function FacultyDashboard() {
            <h1 className="text-4xl font-black text-white tracking-tighter uppercase italic flex items-center gap-4">
               Faculty <span className="text-indigo-500">Oracle</span> Hub
            </h1>
-           <p className="text-gray-500 text-xs font-bold uppercase tracking-widest leading-none mt-1">
+           <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest leading-none mt-1">
              {faculty.designation} • {faculty.school} • Cabin: {faculty.cabin}
            </p>
         </div>
@@ -68,7 +97,7 @@ export default async function FacultyDashboard() {
             label="Proctees Assigned" 
             value={totalProctees} 
             subtitle="Under Mentorship" 
-            icon={<Users className="w-5 h-5 text-indigo-400" />}
+            icon={<Users className="w-5 h-5" />}
             status="ACTIVE"
             color="indigo"
          />
@@ -76,7 +105,7 @@ export default async function FacultyDashboard() {
             label="Critical Alerts" 
             value={criticalProctees} 
             subtitle="Low Attendance/GPA" 
-            icon={<AlertTriangle className="w-5 h-5 text-rose-400" />}
+            icon={<AlertTriangle className="w-5 h-5" />}
             status="REQUIRES ACTION"
             color="rose"
          />
@@ -84,15 +113,15 @@ export default async function FacultyDashboard() {
             label="Courses Taught" 
             value={faculty.courses.length} 
             subtitle="Current Semester" 
-            icon={<BookOpen className="w-5 h-5 text-emerald-400" />}
+            icon={<BookOpen className="w-5 h-5" />}
             status="SEAMLESS"
             color="emerald"
          />
          <MetricCard 
             label="Research Index" 
-            value={faculty.supervisedScholars.reduce((sum, s) => sum + (s.hIndex || 0), 0) / (faculty.supervisedScholars.length || 1) || "1.0"} 
+            value={faculty.supervisedScholars.length > 0 ? (faculty.supervisedScholars.reduce((sum, s) => sum + (s.hIndex || 0), 0) / faculty.supervisedScholars.length).toFixed(1) : "1.0"} 
             subtitle="Avg. H-Index of Scholars" 
-            icon={<TrendingUp className="w-5 h-5 text-purple-400" />}
+            icon={<TrendingUp className="w-5 h-5" />}
             status="EXCELLENT"
             color="purple"
          />
@@ -113,7 +142,7 @@ export default async function FacultyDashboard() {
                 </CardHeader>
                 <CardContent className="p-0">
                     <div className="divide-y divide-white/5">
-                        {todayClasses.length > 0 ? todayClasses.map((cls: any, i: number) => (
+                        {todayClasses.length > 0 ? todayClasses.map((cls, i) => (
                            <div key={i} className="p-6 hover:bg-white/[0.02] transition-all group flex items-center justify-between">
                                 <div className="flex gap-6 items-center">
                                     <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center justify-center">
@@ -125,7 +154,7 @@ export default async function FacultyDashboard() {
                                         <h4 className="text-white font-black text-md uppercase italic tracking-tight group-hover:text-indigo-400 transition-colors">{cls.course.title}</h4>
                                         <p className="text-[9px] text-gray-500 font-bold uppercase tracking-widest leading-none">Slot: {cls.slot} • Venue: {cls.venue}</p>
                                         <div className="flex items-center gap-2 pt-2">
-                                            <Badge className="bg-emerald-500/10 text-emerald-400 border-none text-[7px] font-black uppercase">{cls.course.type}</Badge>
+                                            <Badge className="bg-emerald-500/10 text-emerald-400 border-none text-[7px] font-black uppercase">Theory</Badge>
                                             <Badge className="bg-white/5 text-gray-600 border-none text-[7px] font-black uppercase">{cls.course.registrations.length} Enrolled</Badge>
                                         </div>
                                     </div>
@@ -161,7 +190,7 @@ export default async function FacultyDashboard() {
                         </CardTitle>
                      </CardHeader>
                      <CardContent className="p-0">
-                         {faculty.proctees.slice(0, 4).map((proctee: any) => (
+                         {faculty.proctees.slice(0, 4).map((proctee) => (
                              <div key={proctee.id} className="p-4 flex items-center justify-between border-b border-white/5 hover:bg-white/[0.01] transition-all">
                                  <div className="flex items-center gap-3">
                                      <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white text-[10px] font-black italic">{proctee.user.name[0]}</div>
@@ -171,7 +200,7 @@ export default async function FacultyDashboard() {
                                      </div>
                                  </div>
                                  <div className="text-right">
-                                     <p className="text-[10px] text-white font-black italic">{proctee.cgpa.toFixed(2)}</p>
+                                     <p className="text-[10px] text-white font-black italic">{(proctee.cgpa || 0).toFixed(2)}</p>
                                      <p className="text-[7px] text-gray-700 font-black uppercase">CGPA</p>
                                  </div>
                              </div>
@@ -192,9 +221,9 @@ export default async function FacultyDashboard() {
                      </CardHeader>
                      <CardContent className="p-6">
                          <div className="space-y-6">
-                            <ResearchStat label="Journals Published" value={faculty.supervisedScholars.reduce((sum, s) => sum + s.publicationsCount, 0)} color="indigo" />
+                            <ResearchStat label="Journals Published" value={faculty.supervisedScholars.reduce((sum, s) => sum + (s.publicationsCount || 0), 0)} color="indigo" />
                             <ResearchStat label="Scholars Supervised" value={faculty.supervisedScholars.length} color="emerald" />
-                            <ResearchStat label="Total Citations" value={faculty.supervisedScholars.reduce((sum, s) => sum + s.citations, 0)} color="purple" />
+                            <ResearchStat label="Total Citations" value={faculty.supervisedScholars.reduce((sum, s) => sum + (s.citations || 0), 0)} color="purple" />
                             <ResearchStat label="Ongoing Projects" value="02" color="amber" />
                             <Link href="/faculty/research">
                                 <Button className="w-full mt-2 bg-emerald-600/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-600 hover:text-white font-black uppercase text-[9px] tracking-widest h-10 transition-all rounded-xl">
@@ -248,7 +277,7 @@ export default async function FacultyDashboard() {
              <Card className="bg-white/5 border-white/10 p-6">
                 <h4 className="text-white font-black text-xs uppercase tracking-widest border-b border-white/5 pb-4 mb-4 italic">Institutional Pulse</h4>
                 <div className="space-y-4">
-                    {events.length > 0 ? events.slice(0, 3).map((event: any, i: number) => (
+                    {events.length > 0 ? events.slice(0, 3).map((event, i) => (
                       <PulseItem 
                         key={i} 
                         label={event.title} 
@@ -262,7 +291,7 @@ export default async function FacultyDashboard() {
              <div className="p-8 rounded-[2rem] bg-indigo-600/5 border border-indigo-500/10 text-center space-y-2">
                  <ShieldCheck className="w-10 h-10 mx-auto text-indigo-500/40" />
                  <p className="text-[10px] text-gray-600 uppercase font-black leading-tight">Last Security Audit</p>
-                 <p className="text-[11px] text-indigo-400 font-black italic">Jan 02, 2026 • 11:20 AM</p>
+                 <p className="text-[11px] text-indigo-400 font-black italic">{new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })} • {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
              </div>
          </div>
       </div>
@@ -270,8 +299,8 @@ export default async function FacultyDashboard() {
   )
 }
 
-function MetricCard({ label, value, subtitle, icon, status, color }: any) {
-    const colorMap: any = {
+function MetricCard({ label, value, subtitle, icon, status, color }: MetricCardProps) {
+    const colorMap = {
       indigo: "text-indigo-400 border-indigo-500/20 bg-indigo-500/5",
       rose: "text-rose-400 border-rose-500/20 bg-rose-500/5",
       emerald: "text-emerald-400 border-emerald-500/20 bg-emerald-500/5",
@@ -294,8 +323,8 @@ function MetricCard({ label, value, subtitle, icon, status, color }: any) {
     )
 }
 
-function ResearchStat({ label, value, color }: any) {
-    const colorMap: any = {
+function ResearchStat({ label, value, color }: ResearchStatProps) {
+    const colorMap = {
         indigo: "bg-indigo-500",
         emerald: "bg-emerald-500",
         purple: "bg-purple-500",
@@ -312,22 +341,22 @@ function ResearchStat({ label, value, color }: any) {
     )
 }
 
-function ToolButton({ icon, label, color }: any) {
-    const colorMap: any = {
+function ToolButton({ icon, label, color }: ToolButtonProps) {
+    const colorMap = {
         indigo: "hover:bg-indigo-600/20 hover:text-indigo-400 border-indigo-500/20 hover:border-indigo-500/40",
         amber: "hover:bg-amber-600/20 hover:text-amber-400 border-amber-500/20 hover:border-amber-500/40",
         emerald: "hover:bg-emerald-600/20 hover:text-emerald-400 border-emerald-500/20 hover:border-emerald-500/40",
         purple: "hover:bg-purple-600/20 hover:text-purple-400 border-purple-500/20 hover:border-purple-500/40",
     }
     return (
-        <Button variant="outline" className={`h-16 flex-col gap-1.5 bg-white/5 border text-gray-500 transition-all rounded-xl ${colorMap[color]}`}>
+        <Button variant="outline" className={`h-16 w-full flex-col gap-1.5 bg-white/5 border text-gray-500 transition-all rounded-xl ${colorMap[color]}`}>
             {icon}
             <span className="text-[8px] font-black uppercase tracking-tight">{label}</span>
         </Button>
     )
 }
 
-function PulseItem({ label, time, floor }: any) {
+function PulseItem({ label, time, floor }: PulseItemProps) {
     return (
         <div className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 group hover:border-white/10 transition-all cursor-default">
             <div className="space-y-0.5">
