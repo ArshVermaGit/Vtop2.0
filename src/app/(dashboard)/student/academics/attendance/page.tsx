@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle2, XCircle, Clock, Percent, Activity, Fingerprint, Calendar, BookOpen, User, AlertCircle } from "lucide-react"
+import { CheckCircle2, XCircle, Clock, Activity, Fingerprint, User } from "lucide-react"
 import { getAttendance, getAttendanceLogs, getBiometricReports } from "@/lib/actions"
 import { Progress } from "@/components/ui/progress"
 
