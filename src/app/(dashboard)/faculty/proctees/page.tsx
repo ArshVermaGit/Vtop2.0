@@ -3,15 +3,15 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Users, Search, Mail, ExternalLink, CheckCircle2, AlertTriangle } from "lucide-react"
+import { Users, Search, Mail, ExternalLink, CheckCircle2 } from "lucide-react"
 import { getProctees } from "@/lib/actions"
 
 export default async function ProcteeViewPage() {
   const procteesRaw = await getProctees()
   
-  const proctees = (procteesRaw as any[]).map(p => {
+    const proctees = (procteesRaw as { user: { name: string }, attendance: { percentage: number }[], cgpa: number, regNo: string }[]).map(p => {
     const avgAttendance = p.attendance.length > 0
-        ? p.attendance.reduce((sum: number, a: any) => sum + a.percentage, 0) / p.attendance.length
+        ? p.attendance.reduce((sum: number, a: { percentage: number }) => sum + a.percentage, 0) / p.attendance.length
         : 100
     
     let status = "GOOD"
@@ -157,6 +157,6 @@ export default async function ProcteeViewPage() {
   )
 }
 
-function cn(...classes: any[]) {
+function cn(...classes: (string | boolean | undefined | null)[]) {
   return classes.filter(Boolean).join(' ')
 }
