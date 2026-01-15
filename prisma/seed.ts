@@ -6,8 +6,9 @@ async function main() {
   const models = ['securityAudit', 'facultyLeave', 'payroll', 'parentAnnouncement', 'eResource', 'libraryDue', 'bookReservation', 'bookIssue', 'book', 'feedbackResponse', 'feedbackSurvey', 'activityPoint', 'achievement', 'clubEvent', 'clubMembership', 'club', 'placementApplication', 'careerOpportunity', 'placementDrive', 'councilAnnouncement', 'communication', 'programmeMigration', 'digitalCredential', 'registrationWindow', 'serviceRequest', 'scholarship', 'feeStructure', 'permissionLetter', 'hostelConsentForm', 'messMenu', 'hostelMaintenance', 'hostelAdmission', 'researchLetter', 'progressReport', 'researchPublication', 'reevaluationRequest', 'gradeHistory', 'seatAllocation', 'examSchedule', 'forumReply', 'forumPost', 'courseAnnouncement', 'assignmentSubmission', 'assignment', 'academicEvent', 'semesterMilestone', 'adminActionLog', 'biometricReport', 'examApplication', 'thesisSubmission', 'leaveRequest', 'payment', 'marks', 'attendance', 'timeTable', 'courseRegistration', 'courseMaterial', 'meeting', 'counsellingRecord', 'course', 'researchProfile', 'studentProfile', 'facultyProfile', 'parentProfile', 'adminProfile', 'user']
   
   for (const model of models) {
-    if ((prisma as any)[model]) {
-      await (prisma as any)[model].deleteMany()
+    const table = (prisma as Record<string, any>)[model]
+    if (table) {
+      await table.deleteMany()
     }
   }
 
@@ -746,7 +747,7 @@ async function main() {
         }
     })
 
-    const facultySurvey = await prisma.feedbackSurvey.create({
+    await prisma.feedbackSurvey.create({
         data: {
             type: 'FACULTY',
             title: 'Faculty Evaluation - Winter 2024-25',
