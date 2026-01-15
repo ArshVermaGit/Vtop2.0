@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
-import { User, Mail, Phone, Calendar, MapPin, Building, Briefcase, ShieldCheck, Heart, Camera, FileText, Info } from "lucide-react"
+import { User, Phone, Calendar, MapPin, Building, Briefcase, ShieldCheck, Heart, Camera } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getFacultyProfile } from "@/lib/actions"
 import Image from "next/image"
@@ -183,28 +183,4 @@ export default async function FacultyProfilePage() {
       </Tabs>
     </div>
   )
-}
-
-function FingerprintIcon(props: any) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M12 10a2 2 0 0 0-2 2c0 .24.01.48.04.7" />
-            <path d="M7 10a5 5 0 0 1 10 0c0 .49-.02.99-.06 1.48" />
-            <path d="M3.3 7a9 9 0 0 1 17.4 0" />
-            <path d="M12 22v-4" />
-            <path d="M8 22v-4" />
-            <path d="M16 22v-4" />
-        </svg>
-    )
 }
