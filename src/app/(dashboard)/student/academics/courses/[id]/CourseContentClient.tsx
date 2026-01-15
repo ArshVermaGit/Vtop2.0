@@ -7,12 +7,12 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { FileText, Download, Upload, MessageSquare, Bell, BookOpen, Send, User, Calendar, CheckCircle2, Clock, AlertCircle } from "lucide-react"
+import { FileText, Download, Upload, MessageSquare, Bell, BookOpen, Send, CheckCircle2, Clock } from "lucide-react"
 import { submitAssignment, postForumPost, postForumReply } from "@/lib/actions"
 import { toast } from "sonner"
 import { format } from "date-fns"
 
-export default function CourseContentClient({ course }: { course: any }) {
+export default function CourseContentClient({ course }: { course: { id: string, code: string, title: string, type: string, credits: number, slot: string | null, faculty?: { user: { name: string } } | null, materials: { id: string, title: string, type: string, createdAt: string | Date }[], assignments: { id: string, title: string, dueDate: string | Date, description: string | null, submissions: { id: string }[] }[], announcements: { id: string, title: string, content: string, createdAt: string | Date }[], forumPosts: { id: string, title: string, content: string, createdAt: string | Date, author: { name: string }, replies: { id: string, content: string, createdAt: string | Date, author: { name: string } }[] }[] } }) {
   const [activeTab, setActiveTab] = useState("materials")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [newPost, setNewPost] = useState({ title: "", content: "" })
@@ -25,6 +25,7 @@ export default function CourseContentClient({ course }: { course: any }) {
       await submitAssignment(assignmentId, "https://example.com/submission.pdf")
       toast.success("Assignment submitted successfully!")
     } catch (error) {
+      console.error(error)
       toast.error("Failed to submit assignment.")
     } finally {
       setIsSubmitting(false)
@@ -38,6 +39,7 @@ export default function CourseContentClient({ course }: { course: any }) {
       toast.success("Post created!")
       setNewPost({ title: "", content: "" })
     } catch (error) {
+      console.error(error)
       toast.error("Failed to create post.")
     }
   }
@@ -50,6 +52,7 @@ export default function CourseContentClient({ course }: { course: any }) {
       toast.success("Reply posted!")
       setReplies(prev => ({ ...prev, [postId]: "" }))
     } catch (error) {
+      console.error(error)
       toast.error("Failed to post reply.")
     }
   }
@@ -111,7 +114,7 @@ export default function CourseContentClient({ course }: { course: any }) {
 
             <TabsContent value="materials" className="space-y-4">
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {course.materials.map((m: any) => (
+                    {course.materials.map((m: { id: string, title: string, type: string, createdAt: string | Date }) => (
                         <div key={m.id} className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between group hover:border-blue-500/30 transition-all shadow-lg">
                             <div className="flex items-center gap-4">
                                 <div className="p-3 rounded-lg bg-blue-600/10 text-blue-400 border border-blue-500/20">
@@ -131,7 +134,7 @@ export default function CourseContentClient({ course }: { course: any }) {
             </TabsContent>
 
             <TabsContent value="assignments" className="space-y-4">
-                 {course.assignments.map((a: any) => (
+                 {course.assignments.map((a: { id: string, title: string, dueDate: string | Date, description: string | null, submissions: { id: string }[] }) => (
                     <Card key={a.id} className="bg-white/5 border-white/10 group hover:border-purple-500/30 transition-all">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0">
                             <div>
@@ -169,7 +172,7 @@ export default function CourseContentClient({ course }: { course: any }) {
             </TabsContent>
 
             <TabsContent value="announcements" className="space-y-4">
-                 {course.announcements.map((an: any) => (
+                 {course.announcements.map((an: { id: string, title: string, content: string, createdAt: string | Date }) => (
                     <div key={an.id} className="p-6 rounded-2xl bg-amber-600/5 border border-amber-500/10 space-y-2 relative overflow-hidden group">
                         <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                             <Bell className="w-12 h-12 text-amber-400" />
@@ -208,7 +211,7 @@ export default function CourseContentClient({ course }: { course: any }) {
                  </Card>
 
                  <div className="space-y-4">
-                    {course.forumPosts.map((post: any) => (
+                    {course.forumPosts.map((post: { id: string, title: string, content: string, createdAt: string | Date, author: { name: string }, replies: { id: string, content: string, createdAt: string | Date, author: { name: string } }[] }) => (
                         <div key={post.id} className="space-y-4">
                             <div className="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
                                 <div className="flex items-center gap-3">
