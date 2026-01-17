@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { FileText, Send, CheckCircle, Info } from "lucide-react"
+import { FileText, Send, Info } from "lucide-react"
 import { getServiceRequests } from "@/lib/actions"
 
 export default async function BonafidePage() {
@@ -41,7 +41,7 @@ export default async function BonafidePage() {
                     
                     <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 flex gap-3 text-blue-400 text-xs">
                         <Info className="w-5 h-5 shrink-0" />
-                        <p>E-Bonafide will be available for download in the "Digital Credentials" section once approved.</p>
+                        <p>E-Bonafide will be available for download in the &quot;Digital Credentials&quot; section once approved.</p>
                     </div>
 
                     <Button className="w-full bg-blue-600 hover:bg-blue-700 font-bold">
