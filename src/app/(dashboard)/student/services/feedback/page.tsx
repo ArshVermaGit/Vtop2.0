@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { 
   MessageSquare, 
@@ -186,7 +186,7 @@ export default async function FeedbackCenterPage() {
                     <h4 className="text-white font-black text-xs uppercase tracking-widest">Quality Assurance</h4>
                  </div>
                  <p className="text-[11px] text-gray-500 italic leading-snug">
-                    "Your feedback helps the Board of Studies refine curriculum and enhance lab infrastructure. Every response counts."
+                    &quot;Your feedback helps the Board of Studies refine curriculum and enhance lab infrastructure. Every response counts.&quot;
                  </p>
                  <div className="pt-4 border-t border-white/10">
                     <p className="text-white font-black text-[9px] uppercase tracking-tighter">— Office of Academic Quality</p>
