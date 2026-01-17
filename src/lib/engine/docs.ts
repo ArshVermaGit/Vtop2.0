@@ -1,7 +1,8 @@
 // --- VTOP 2.0 DOCUMENT ENGINE ---
 
-export async function generatePDF(type: 'TRANSCRIPT' | 'HALL_TICKET' | 'PAYSLIP', data: any) {
+export async function generatePDF(type: 'TRANSCRIPT' | 'HALL_TICKET' | 'PAYSLIP', _data: Record<string, unknown>) {
     console.log(`[DOC_ENGINE] Starting PDF Generation Protocol for: ${type}`);
+    void _data; // Suppress unused warning
     // In a real environment, we would use jspdf or puppeteer.
     // For VTOP 2.0, we simulate the server-side processing delay and return a mock URL.
     await new Promise(resolve => setTimeout(resolve, 1500));
@@ -16,7 +17,7 @@ export async function generatePDF(type: 'TRANSCRIPT' | 'HALL_TICKET' | 'PAYSLIP'
     };
 }
 
-export function convertToCSV(data: any[]) {
+export function convertToCSV(data: Record<string, unknown>[]) {
     if (!data || !data.length) return "";
     
     const headers = Object.keys(data[0]);
@@ -28,7 +29,7 @@ export function convertToCSV(data: any[]) {
     return csvRows.join('\r\n');
 }
 
-export async function generateCSVExport(type: string, data: any[]) {
+export async function generateCSVExport(type: string, data: Record<string, unknown>[]) {
     console.log(`[DOC_ENGINE] Compiling CSV Dataset: ${type}`);
     const csvContent = convertToCSV(data);
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
