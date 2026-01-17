@@ -1,11 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { 
   Book, 
   Search, 
   BookOpen, 
   Clock, 
-  History, 
   Globe, 
   ExternalLink, 
   Library, 
@@ -17,7 +16,6 @@ import {
 } from "lucide-react"
 import { getLibraryStatus } from "@/lib/actions"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import Link from "next/link"
 
 export default async function LibraryPage() {
