@@ -21,8 +21,8 @@ export function DatabaseControlClient({ counts }: { counts: Record<string, numbe
       await clearDatabase()
       toast.success("Database cleared successfully!")
       router.refresh()
-    } catch (error: any) {
-      toast.error(error.message || "Failed to clear database")
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to clear database")
     } finally {
       setIsLoading(false)
     }
@@ -34,8 +34,8 @@ export function DatabaseControlClient({ counts }: { counts: Record<string, numbe
       await seedDatabase()
       toast.success("Database seeded with sample data!")
       router.refresh()
-    } catch (error: any) {
-      toast.error(error.message || "Failed to seed database")
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to seed database")
     } finally {
       setIsSeeding(false)
     }
