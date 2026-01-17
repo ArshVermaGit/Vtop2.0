@@ -14,7 +14,7 @@ export async function getSystemAudit() {
   const counts: Record<string, number> = {}
   
   await Promise.all(models.map(async (m) => {
-    counts[m] = await (prisma as Record<string, any>)[m].count()
+    counts[m] = await (prisma as unknown as Record<string, { count: () => Promise<number> }>)[m].count()
   }))
 
   return counts
@@ -494,7 +494,7 @@ export async function getModelData(modelName: string, page: number = 1, pageSize
   const session = await getServerSession(authOptions)
   if (!session?.user || session.user.role !== 'ADMIN') throw new Error("Unauthorized")
 
-  const prismaModel = (prisma as any)[modelName]
+  const prismaModel = (prisma as unknown as Record<string, { findMany: (args: Record<string, unknown>) => Promise<Record<string, unknown>[]>, count: () => Promise<number> }>)[modelName]
   if (!prismaModel) throw new Error("Invalid model name")
 
   const [data, total] = await Promise.all([
@@ -513,7 +513,7 @@ export async function deleteModelRecord(modelName: string, id: string) {
   const session = await getServerSession(authOptions)
   if (!session?.user || session.user.role !== 'ADMIN') throw new Error("Unauthorized")
 
-  const prismaModel = (prisma as any)[modelName]
+  const prismaModel = (prisma as unknown as Record<string, { delete: (args: { where: { id: string } }) => Promise<Record<string, unknown>> }>)[modelName]
   if (!prismaModel) throw new Error("Invalid model name")
 
   return await prismaModel.delete({ where: { id } })
@@ -526,8 +526,9 @@ export async function clearDatabase() {
   const models = ['securityAudit', 'facultyLeave', 'payroll', 'parentAnnouncement', 'eResource', 'libraryDue', 'bookReservation', 'bookIssue', 'book', 'feedbackResponse', 'feedbackSurvey', 'activityPoint', 'achievement', 'clubEvent', 'clubMembership', 'club', 'placementApplication', 'careerOpportunity', 'placementDrive', 'councilAnnouncement', 'communication', 'programmeMigration', 'digitalCredential', 'registrationWindow', 'serviceRequest', 'scholarship', 'feeStructure', 'permissionLetter', 'hostelConsentForm', 'messMenu', 'hostelMaintenance', 'hostelAdmission', 'researchLetter', 'progressReport', 'researchPublication', 'reevaluationRequest', 'gradeHistory', 'seatAllocation', 'examSchedule', 'forumReply', 'forumPost', 'courseAnnouncement', 'assignmentSubmission', 'assignment', 'academicEvent', 'semesterMilestone', 'biometricReport', 'examApplication', 'thesisSubmission', 'leaveRequest', 'payment', 'marks', 'attendance', 'timeTable', 'courseRegistration', 'courseMaterial', 'meeting', 'counsellingRecord', 'course', 'researchProfile', 'studentProfile', 'facultyProfile', 'parentProfile', 'adminProfile', 'user']
   
   for (const model of models) {
-    if ((prisma as any)[model]) {
-      await (prisma as any)[model].deleteMany()
+    const prismaModel = (prisma as unknown as Record<string, { deleteMany: () => Promise<{ count: number }> }>)[model]
+    if (prismaModel) {
+      await prismaModel.deleteMany()
     }
   }
 
