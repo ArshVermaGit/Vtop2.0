@@ -6,6 +6,21 @@ import { authOptions } from "@/lib/auth"
 import * as DocumentEngine from "@/lib/engine/docs"
 import * as SyncEngine from "@/lib/engine/sync"
 import * as NotifyEngine from "@/lib/engine/notify"
+import crypto from "crypto"
+
+function generateSecureCode(length: number): string {
+  // Generate cryptographically secure random bytes and encode as an
+  // uppercase base36-like string, trimming to the requested length.
+  // We generate extra bytes to ensure enough characters after encoding.
+  const bytes = crypto.randomBytes(Math.ceil((length * 2) / 3) + 2)
+  const base36 = BigInt("0x" + bytes.toString("hex")).toString(36)
+  const clean = base36.replace(/[^a-z0-9]/gi, "").toUpperCase()
+  if (clean.length >= length) {
+    return clean.substring(0, length)
+  }
+  // If, in rare cases, we didn't get enough characters, recursively top up.
+  return clean + generateSecureCode(length - clean.length)
+}
 
 export async function getStudentProfile() {
   const session = await getServerSession(authOptions)
@@ -1465,9 +1480,9 @@ export async function toggle2FA(enabled: boolean) {
   const userId = session.user.id
 
   if (enabled) {
-      // Generate a dummy secret for mock 2FA
-      const secret = Math.random().toString(36).substring(2, 12).toUpperCase()
-      const codes = Array.from({ length: 5 }, () => Math.random().toString(36).substring(2, 8).toUpperCase())
+      // Generate a secret and backup codes for 2FA using a cryptographically secure PRNG
+      const secret = generateSecureCode(10)
+      const codes = Array.from({ length: 5 }, () => generateSecureCode(6))
       
       await prisma.user.update({
           where: { id: userId },
