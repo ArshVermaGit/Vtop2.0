@@ -1,6 +1,6 @@
 // --- VTOP 2.0 LEGACY SYNC ENGINE ---
 
-export async function solveCaptcha(imageData?: string) {
+export async function solveCaptcha() {
     console.log("[SYNC_ENGINE] Captcha Challenge Received. Initializing Solver...");
     // Simulating neural network processing for captcha solving
     await new Promise(resolve => setTimeout(resolve, 2000));
