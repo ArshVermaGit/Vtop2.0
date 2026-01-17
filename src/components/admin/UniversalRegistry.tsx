@@ -23,7 +23,7 @@ const MODELS = [
 
 export function UniversalRegistry() {
   const [model, setModel] = useState<string>("user")
-  const [data, setData] = useState<any[]>([])
+  const [data, setData] = useState<Record<string, unknown>[]>([])
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
   const [isLoading, setIsLoading] = useState(false)
@@ -33,10 +33,10 @@ export function UniversalRegistry() {
     setIsLoading(true)
     try {
       const result = await getModelData(model, page)
-      setData(result.data as any[])
+      setData(result.data as Record<string, unknown>[])
       setTotal(result.total)
-    } catch (error: any) {
-      toast.error(error.message)
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "An error occurred")
     } finally {
       setIsLoading(false)
     }
@@ -52,8 +52,8 @@ export function UniversalRegistry() {
       await deleteModelRecord(model, id)
       toast.success("Record deleted")
       loadData()
-    } catch (error: any) {
-      toast.error(error.message)
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "An error occurred")
     }
   }
 
@@ -125,7 +125,7 @@ export function UniversalRegistry() {
                     </TableHeader>
                     <TableBody>
                         {data.filter(row => JSON.stringify(row).toLowerCase().includes(search.toLowerCase())).map((row, idx) => (
-                            <TableRow key={row.id || idx} className="border-white/5 hover:bg-white/[0.02] transition-colors group">
+                            <TableRow key={(row.id as string) || idx} className="border-white/5 hover:bg-white/[0.02] transition-colors group">
                                 {headers.map(h => (
                                     <TableCell key={h} className="text-xs text-gray-300 max-w-[200px] truncate">
                                         {typeof row[h] === 'object' ? (
@@ -138,7 +138,7 @@ export function UniversalRegistry() {
                                         variant="ghost" 
                                         size="icon" 
                                         className="h-8 w-8 text-rose-500 hover:bg-rose-500/10 opacity-0 group-hover:opacity-100 transition-opacity"
-                                        onClick={() => handleDelete(row.id)}
+                                        onClick={() => handleDelete(row.id as string)}
                                     >
                                         <Trash2 className="w-4 h-4" />
                                     </Button>
